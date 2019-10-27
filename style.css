@@ -1,0 +1,23 @@
+body {
+    background-color: #232323;
+}
+
+h1 {
+    text-align: center;
+    background-color: blue;
+    color: white;
+    padding: 5%; /* Need to edit this */
+    margin-bottom: 0;
+}
+
+.square {
+    width: 30%;
+    padding-bottom: 30%;
+    float: left;
+    margin: 1.66%;
+}
+
+#container {
+    margin: 0 auto; 
+    max-width: 600px;
+}
