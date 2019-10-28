@@ -6,7 +6,7 @@ h1 {
     text-align: center;
     background-color: blue;
     color: white;
-    padding: 5%; /* Need to edit this */
+    padding: 2%; /* Need to edit this */
     margin-bottom: 0;
 }
 
@@ -17,7 +17,15 @@ h1 {
     margin: 1.66%;
 }
 
+#winningValue {
+    font-size: 1.5em;
+}
+
 #container {
     margin: 0 auto; 
     max-width: 600px;
+}
+
+#navigation {
+    background-color: white;
 }
