@@ -1,19 +1,51 @@
-//initialize variables that represent DOM elements
-let winningValue = document.getElementById("winningValue");
-let squares = document.querySelectorAll(".square");
-let body = document.querySelector("body");
-let messageDisplay = document.getElementById("message");
-let h1 = document.querySelector("h1");
-let newGame = document.getElementById("newGame");
+//default starting settings (hard mode)
+let numSquares = 6; //initialize hard mode w/ six choices
+let colors = getRandomColor(numSquares); //gets the random colors for the game
 
-//Getting the random colors for the current game
-function getRandomColor(num) {
-    let colorArr = []; //initialize empty array to hold the colors
-    for (let i = 0; i < num; i++) { //repeat for number of squares chosen: easy = 3, hard = 6)
-        colorArr.push(generateRandomRGB()); //push each color to the color array
+//initialize variables that represent DOM elements
+let winningValue = document.getElementById("winningValue"); 
+let squares = document.querySelectorAll(".square"); //color squares
+let body = document.querySelector("body"); 
+let messageDisplay = document.getElementById("message"); 
+let h1 = document.querySelector("h1"); //header (game title and winning rgb value)
+let newGame = document.getElementById("newGame"); //reset button (new colors/play again)
+let easyButton = document.getElementById("easy"); //easy difficulty button
+let hardButton = document.getElementById("hard"); //hard difficulty button
+
+//Picking easy mode
+easyButton.addEventListener("click", function(){
+    easyButton.classList.add("selected"); //select easy
+    hardButton.classList.remove("selected"); //deselect hard
+    numSquares = 3;
+    colors = getRandomColor(numSquares); //get 3 new colors for easy mode
+    setWinningColor(); //set new winning color
+    messageDisplay.textContent = "";
+    newGame.textContent = "NEW COLORS"; 
+    h1.style.backgroundColor = "blue";
+    for (let i = 0; i < squares.length; i++){
+        if (colors[i]){
+            squares[i].style.background = colors[i];
+        } else{
+            squares[i].style.display = "none";
+        }
     }
-    return colorArr;
-}
+});
+
+//Picking hard mode
+hardButton.addEventListener("click", function(){
+    hardButton.classList.add("selected");
+    easyButton.classList.remove("selected");
+    numSquares = 6;
+    colors = getRandomColor(numSquares); //get 6 new colors for hard mode
+    setWinningColor(); //set new winning color
+    messageDisplay.textContent = "";
+    newGame.textContent = "NEW COLORS";
+    h1.style.backgroundColor = "blue";
+    for (let i = 0; i < squares.length; i++){
+        squares[i].style.background = colors[i];
+        squares[i].style.display = "block";
+    }
+});
 
 //Generate random RGB values for each random color
 function generateRandomRGB() {
@@ -25,7 +57,16 @@ function generateRandomRGB() {
     return "rgb(" + rgbArr[0].toString() + ", " + rgbArr[1].toString() + ", " + rgbArr[2].toString() + ")"; //the color is the combination of r, g, and b values
 }
 
-//Setting the color of the squares
+//Getting the random colors for the current game
+function getRandomColor(num) { //takes number of squares as an input
+    let colorArr = []; //initialize empty array to hold the colors
+    for (let i = 0; i < num; i++) { //repeat for number of squares chosen: easy = 3, hard = 6)
+        colorArr.push(generateRandomRGB()); //push each color to the color array
+    }
+    return colorArr;
+}
+
+//Setting the color of the squares & game play
 function setSquares() {
     for (let i = 0; i < squares.length; i++) {
         squares[i].style.backgroundColor = colors[i];
@@ -47,16 +88,6 @@ function setWinningColor() {
     winningValue.textContent = colors[winner].toUpperCase(); //set the winning value to that color
 }
 
-//Reset game with default conditions and new random colors
-function reset(){
-    colors = getRandomColor(6); //gets the random colors for the game
-    setWinningColor();
-    setSquares();
-    messageDisplay.textContent = "";
-    newGame.textContent = "NEW COLORS";
-    h1.style.backgroundColor = "blue";
-}
-
 //Winning conditions
 function winningConditions() {
     messageDisplay.textContent = "Correct!"; //correct!
@@ -69,8 +100,17 @@ function winningConditions() {
     //new colors = Play again?
 }
 
+//Reset game with default conditions and new random colors
+function reset(){
+    colors = getRandomColor(numSquares); //gets the random colors for the game
+    setWinningColor();
+    setSquares();
+    messageDisplay.textContent = "";
+    newGame.textContent = "NEW COLORS";
+    h1.style.backgroundColor = "blue";
+}
+
 //Initializing the game
-let colors = getRandomColor(6); //gets the random colors for the game
-setWinningColor();
-setSquares();
-newGame.addEventListener("click", reset);
+setWinningColor(); //sets the winning color
+setSquares(); //sets the squares and allows game play
+newGame.addEventListener("click", reset); //resets game when button for new game is clicked
