@@ -6,16 +6,23 @@ let body = document.querySelector("body");
 let messageDisplay = document.getElementById("message");
 let h1 = document.querySelector("h1");
 
-let colors = [getRandomRGB(), getRandomRGB(), getRandomRGB(), getRandomRGB(), getRandomRGB(), getRandomRGB()];
-
-//Randomizing the RGB values
-function getRandomRGB() {
-    let colorArr = []; //initialize empty array
-    for (let i = 0; i < 3; i++) { //randomize a value (0 - 255) for r, g, and b
-        let value = Math.floor(Math.random() * 256);
-        colorArr.push(value); //add that value to the array
+//Getting the random colors for the current game
+function getRandomColor(num) {
+    let colorArr = []; //initialize empty array to hold the colors
+    for (let i = 0; i < num; i++) { //repeat for number of squares chosen: easy = 3, hard = 6)
+        colorArr.push(generateRandomRGB()); //push each color to the color array
     }
-    return color = "rgb(" + colorArr[0].toString() + ", " + colorArr[1].toString() + ", " + colorArr[2].toString() + ")";
+    return colorArr;
+}
+
+//Generate random RGB values for each random color
+function generateRandomRGB(){
+    let rgbArr = []; //initialize empty array to hold the r, g, an b value for each color
+        for (let i = 0; i < 3; i++) { //randomize a value (0 - 255) for r, g, and b
+            let value = Math.floor(Math.random() * 256);
+            rgbArr.push(value); //add that value to the rgb array
+        }
+    return color = "rgb(" + rgbArr[0].toString() + ", " + rgbArr[1].toString() + ", " + rgbArr[2].toString() + ")"; //the color is the combination of r, g, and b values
 }
 
 //Setting the color of the squares
@@ -56,5 +63,6 @@ function winningConditions() {
 }
 
 //Initializing the game
-setSquares();
+let colors = getRandomColor(6); //gets the random colors for the game
 setWinningColor();
+setSquares();
