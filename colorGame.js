@@ -21,7 +21,7 @@ easyButton.addEventListener("click", function(){
     setWinningColor(); //set new winning color
     messageDisplay.textContent = "";
     newGame.textContent = "NEW COLORS"; 
-    h1.style.backgroundColor = "blue";
+    h1.style.backgroundColor = "steelblue";
     for (let i = 0; i < squares.length; i++){
         if (colors[i]){
             squares[i].style.background = colors[i];
@@ -40,7 +40,7 @@ hardButton.addEventListener("click", function(){
     setWinningColor(); //set new winning color
     messageDisplay.textContent = "";
     newGame.textContent = "NEW COLORS";
-    h1.style.backgroundColor = "blue";
+    h1.style.backgroundColor = "steelblue";
     for (let i = 0; i < squares.length; i++){
         squares[i].style.background = colors[i];
         squares[i].style.display = "block";
@@ -107,7 +107,7 @@ function reset(){
     setSquares();
     messageDisplay.textContent = "";
     newGame.textContent = "NEW COLORS";
-    h1.style.backgroundColor = "blue";
+    h1.style.backgroundColor = "steelblue";
 }
 
 //Initializing the game
